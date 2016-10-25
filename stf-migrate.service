@@ -6,7 +6,6 @@ BindsTo=rethinkdb-proxy-28015.service
 [Service]
 EnvironmentFile=/etc/environment
 Type=oneshot
-ExecStartPre=/usr/bin/docker pull openstf/stf:latest
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
 ExecStart=/usr/bin/docker run --rm \

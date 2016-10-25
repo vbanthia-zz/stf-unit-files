@@ -7,7 +7,6 @@ BindsTo=adbd.service
 EnvironmentFile=/etc/environment
 TimeoutStartSec=0
 Restart=always
-ExecStartPre=/usr/bin/docker pull openstf/stf:latest
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStart=/usr/bin/docker run --rm \
@@ -16,12 +15,12 @@ ExecStart=/usr/bin/docker run --rm \
   openstf/stf:latest \
   stf provider \
     --name "%H/%i" \
-    --connect-sub tcp://192.168.1.106:7250 \
-    --connect-push tcp://192.168.1.106:7270 \
-    --storage-url http://192.168.1.106/ \
-    --public-ip 192.168.1.106 \
+    --connect-sub tcp://YOUR_MACHINE_IP:7250 \
+    --connect-push tcp://YOUR_MACHINE_IP:7270 \
+    --storage-url http://YOUR_MACHINE_IP/ \
+    --public-ip YOUR_MACHINE_IP \
     --min-port=15000 \
     --max-port=25000 \
     --heartbeat-interval 10000 \
-    --screen-ws-url-pattern "ws://192.168.1.106/d/%i/<%= serial %>/<%= publicPort %>/"
+    --screen-ws-url-pattern "ws://YOUR_MACHINE_IP/d/%i/<%= serial %>/<%= publicPort %>/"
 ExecStop=-/usr/bin/docker stop -t 10 %p-%i

@@ -7,7 +7,6 @@ BindsTo=rethinkdb-proxy-28015.service
 EnvironmentFile=/etc/environment
 TimeoutStartSec=0
 Restart=always
-ExecStartPre=/usr/bin/docker pull openstf/stf:latest
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStart=/usr/bin/docker run --rm \
@@ -17,6 +16,6 @@ ExecStart=/usr/bin/docker run --rm \
   -p %i:3000 \
   openstf/stf:latest \
   stf app --port 3000 \
-    --auth-url http://192.168.1.106/auth/mock/ \
-    --websocket-url ws://192.168.1.106/
+    --auth-url http://YOUR_MACHINE_IP/auth/mock/ \
+    --websocket-url ws://YOUR_MACHINE_IP/
 ExecStop=-/usr/bin/docker stop -t 10 %p-%i
